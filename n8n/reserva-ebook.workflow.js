@@ -1,6 +1,7 @@
 import { workflow, node, trigger, sticky, expr } from '@n8n/workflow-sdk';
 
 // ID de la Data Table de este ebook, ya creada en n8n con las columnas del ESQUEMA.
+// El nombre visible es reservas_claude_desde_cero; el ID no cambió al renombrarla.
 const TABLA = 'KPRHxEzOjaL3txG3';
 const ORIGEN_LANDING = 'https://keepsync-hub.github.io';
 
@@ -78,17 +79,17 @@ const CODIGO_DECIDIR = 'const TOTAL = 20;\n'
   + "const tomados = reservados.length + (estadoRespuesta === 'reservado' ? 1 : 0);\n"
   + 'const restantes = Math.max(0, TOTAL - tomados);\n'
   + '\n'
-  + "const pila = 'font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif';\n"
+  + "const pila = 'font-family:Segoe UI,Roboto,Helvetica,Arial,sans-serif';\n"
   + "const saludo = nombre ? '¡Hola, ' + nombre.split(' ')[0] + '!' : '¡Hola!';\n"
   + '\n'
   + 'let asunto, cuerpo;\n'
   + '\n'
   + "if (estadoRespuesta === 'lista_espera') {\n"
-  + "  asunto = 'Quedaste en la lista de espera — IA Local Segura en Apple';\n"
+  + "  asunto = 'Quedaste en la lista de espera — Claude desde Cero';\n"
   + "  cuerpo = '<p>' + saludo + '</p>'\n"
   + "    + '<p>Las ' + TOTAL + ' copias del precio de lanzamiento ya estaban tomadas cuando llegó tu '\n"
   + "    + 'reserva, así que te dejamos en la <strong>lista de espera</strong>.</p>'\n"
-  + "    + '<p>Te escribimos apenas el ebook <strong>IA Local Segura en Apple</strong> esté disponible a su '\n"
+  + "    + '<p>Te escribimos apenas el ebook <strong>Claude desde Cero</strong> esté disponible a su '\n"
   + "    + 'precio normal de <strong>USD ' + PRECIO_NORMAL + '</strong>. No tienes que hacer nada más.</p>';\n"
   + '} else {\n'
   + "  const encabezado = estadoRespuesta === 'ya_reservado'\n"
@@ -104,18 +105,18 @@ const CODIGO_DECIDIR = 'const TOTAL = 20;\n'
   + "    + '<strong>' + HORAS + ' horas</strong>. Pasado ese plazo el cupo se libera para la siguiente '\n"
   + "    + 'persona de la fila.</p>'\n"
   + "    + '<p style=\"margin:28px 0\">'\n"
-  + "    + '<a href=\"' + LINK_PAGO + '\" style=\"background:#0071e3;color:#ffffff;text-decoration:none;'\n"
-  + "    + 'font-weight:700;padding:14px 26px;border-radius:9px;display:inline-block\">Pagar USD ' + PRECIO + '</a>'\n"
+  + "    + '<a href=\"' + LINK_PAGO + '\" style=\"background:#ffd23f;color:#16130d;text-decoration:none;'\n"
+  + "    + 'font-weight:700;padding:14px 26px;border-radius:12px;border:2px solid #16130d;display:inline-block\">Pagar USD ' + PRECIO + '</a>'\n"
   + "    + '</p>'\n"
-  + "    + '<p style=\"font-size:13px;color:#6e6e73\">Si el botón no te funciona, copia este enlace: '\n"
+  + "    + '<p style=\"font-size:13px;color:#5b5648\">Si el botón no te funciona, copia este enlace: '\n"
   + "    + '<a href=\"' + LINK_PAGO + '\">' + LINK_PAGO + '</a></p>'\n"
   + "    + '<p>Apenas confirmemos el pago te llega el enlace de descarga (PDF y EPUB) a este mismo correo.</p>';\n"
   + '}\n'
   + '\n'
-  + "const html = '<div style=\"' + pila + ';color:#1d1d1f;line-height:1.65;max-width:560px\">'\n"
+  + "const html = '<div style=\"' + pila + ';color:#16130d;line-height:1.65;max-width:560px\">'\n"
   + '  + cuerpo\n'
-  + '  + \'<p style="margin-top:30px;padding-top:18px;border-top:1px solid #d2d2d7;color:#6e6e73;font-size:14px">\'\n'
-  + "  + 'IA Local Segura en Apple'\n"
+  + '  + \'<p style="margin-top:30px;padding-top:18px;border-top:2px solid #16130d;color:#5b5648;font-size:14px">\'\n'
+  + "  + 'Claude desde Cero — Sin tecnicismos'\n"
   + "  + '</p></div>';\n"
   + '\n'
   + 'return [{\n'
@@ -166,7 +167,7 @@ const reservaEntrante = trigger({
     name: 'Reserva entrante',
     parameters: {
       httpMethod: 'POST',
-      path: 'ebook-apple-ia/reserva',
+      path: 'claude-desde-cero/reserva',
       responseMode: 'responseNode',
       options: {
         allowedOrigins: ORIGEN_LANDING,
@@ -188,7 +189,7 @@ const leerReservas = node({
     parameters: {
       resource: 'row',
       operation: 'get',
-      dataTableId: { __rl: true, mode: 'id', value: TABLA, cachedResultName: 'reservas_ebook_apple_ia' },
+      dataTableId: { __rl: true, mode: 'id', value: TABLA, cachedResultName: 'reservas_claude_desde_cero' },
       returnAll: true
     },
     notes: 'alwaysOutputData para que la primera reserva de todas, con la tabla vacía, igual llegue al Code.'
@@ -229,7 +230,7 @@ const guardarReserva = node({
     parameters: {
       resource: 'row',
       operation: 'upsert',
-      dataTableId: { __rl: true, mode: 'id', value: TABLA, cachedResultName: 'reservas_ebook_apple_ia' },
+      dataTableId: { __rl: true, mode: 'id', value: TABLA, cachedResultName: 'reservas_claude_desde_cero' },
       matchType: 'allConditions',
       filters: {
         conditions: [{ keyName: 'correo', condition: 'eq', keyValue: expr('{{ $json.correo }}') }]
@@ -285,7 +286,7 @@ const correoConfirmacion = node({
       subject: expr('{{ $(\'Decidir cupo y correo\').first().json.asunto }}'),
       emailType: 'html',
       message: expr('{{ $(\'Decidir cupo y correo\').first().json.html }}'),
-      options: { appendAttribution: false, senderName: 'IA Local Segura en Apple' }
+      options: { appendAttribution: false, senderName: 'Claude desde Cero' }
     },
     credentials: { gmailOAuth2: { id: 'cYhcyiH1LcyrXUWz', name: 'Gmail OAuth2 API' } },
     notes: 'Si Gmail falla la reserva ya está guardada y el navegador ya recibió su confirmación.'
@@ -300,7 +301,7 @@ const cuposEntrante = trigger({
     name: 'Consulta de cupos',
     parameters: {
       httpMethod: 'GET',
-      path: 'ebook-apple-ia/cupos',
+      path: 'claude-desde-cero/cupos',
       responseMode: 'responseNode',
       options: { allowedOrigins: ORIGEN_LANDING, ignoreBots: true }
     },
@@ -318,7 +319,7 @@ const leerCupos = node({
     parameters: {
       resource: 'row',
       operation: 'get',
-      dataTableId: { __rl: true, mode: 'id', value: TABLA, cachedResultName: 'reservas_ebook_apple_ia' },
+      dataTableId: { __rl: true, mode: 'id', value: TABLA, cachedResultName: 'reservas_claude_desde_cero' },
       matchType: 'allConditions',
       filters: {
         conditions: [{ keyName: 'estado', condition: 'eq', keyValue: 'reservado' }]
@@ -354,7 +355,7 @@ const notaPago = sticky(
   { color: 3 }
 );
 
-export default workflow('ebook-apple-ia-reservas', 'Ebook IA Local Segura en Apple · Reservas (GitHub Pages)')
+export default workflow('claude-desde-cero-reservas', 'Ebook Claude desde Cero · Reservas (GitHub Pages)')
   .add(reservaEntrante)
   .to(leerReservas)
   .to(decidirCupo)

@@ -1,54 +1,69 @@
-# IA Local Segura en Apple — landing del ebook
+# Claude desde Cero — landing del ebook
 
-Landing de venta del ebook **IA Local Segura en Apple**, publicada en GitHub Pages.
+Landing de venta del ebook **Claude desde Cero**, publicada en GitHub Pages.
 
-- **URL:** https://keepsync-hub.github.io/apple-ia-local-segura/
-- **Lo que se vende acá es el ebook**, y nada más: enseña a dejar andando, dentro de un Mac mini,
-  un agente que recuerda, aprende la forma de trabajar del equipo y da seguimiento —con el modelo
-  y la memoria en el disco cifrado del equipo, sin salir a internet y apoyándose en los controles
-  que ya pide ISO/IEC 27001.
+- **URL:** https://keepsync-hub.github.io/ks-claude-desde-cero/
+  (⚠️ falta activar **Settings → Pages → Source: GitHub Actions** en este repo: hoy esa URL
+  responde 404 y el sitio se sigue sirviendo desde el repo anterior.)
+- **Lo que se vende acá es el ebook**, y nada más: enseña a usar Claude en el día a día hasta
+  recuperar **16 horas a la semana** —dos días—, con el método completo: los hábitos, los
+  Proyectos que guardan el contexto, las Skills que guardan el procedimiento y el trabajo sobre
+  los archivos reales.
 - **Oferta:** las primeras **20 reservas** pagan **USD 25**; después el ebook queda en **USD 50**.
 - **La reserva y el pago van seguidos.** Al enviar el formulario se guarda el registro y la
   misma página manda a pagar a Webpay, sin salir del sitio. El correo con el mismo link queda
   de respaldo para quien prefiera pagar después, con 48 h de plazo.
-- **El Mac mini preconfigurado no se vende en la página: se cotiza.** Tiene su propia sección
-  (`#equipo`) con el precio de referencia —USD 2.500, con el equipo incluido— y un botón de
-  WhatsApp. Esa venta es conversada y **no toca n8n**.
+- **El taller en vivo no se vende en la página: se cotiza.** Tiene su propia sección (`#taller`)
+  con lo que incluye y un botón de WhatsApp, **sin cifra**: el formato y el precio dependen del
+  tamaño del área. Esa venta es conversada y **no toca n8n**.
 
-Comparte la máquina con la landing de [IA Segura ISO 27001](https://github.com/keepsync-hub/ebook-ia-segura-iso27001):
-mismo flujo de reserva y mismo despliegue. Cambian el contenido, la paleta y las rutas del webhook.
+## La promesa, y de dónde sale
 
-## Cómo se describe el agente
+El número no es una frase de marketing suelta: la sección «De dónde salen las 16 horas» lo
+desglosa en una tabla de seis tareas, y **la tabla tiene que cuadrar**.
 
-El agente se cuenta **solo por sus beneficios** —recuerda, aprende tu forma de trabajar, da
-seguimiento— con un ejemplo concreto de oficina en cada uno, y el cierre que lo diferencia: un
-chatbot público olvida y aprende para su dueño; este recuerda y aprende para quien lo usa, y lo
-aprendido no sale del equipo. **No se nombra ningún proveedor de modelo ni proyecto de origen**,
-ni en la página ni acá. Si alguna vez hay que cambiar la pieza de software que hay debajo, la
-página no se toca.
+| Tarea | Hoy | Con el método | Recupera |
+|---|---|---|---|
+| Correo, mensajes y respuestas | 6 h | 2 h | 4 h |
+| Informes, minutas y resúmenes | 5 h | 1,5 h | 3,5 h |
+| Planillas, cruces y reportes | 4 h | 1 h | 3 h |
+| Documentos y propuestas | 4 h | 1,5 h | 2,5 h |
+| Presentaciones | 3 h | 1 h | 2 h |
+| Buscar y ordenar información | 2 h | 1 h | 1 h |
+| **Total** | **24 h** | **8 h** | **16 h** |
+
+**Si se edita una fila hay que rehacer el total**, y si el total deja de dar 16 hay que cambiar
+también el titular, el hero, la portada del ebook, el `<title>`, la descripción y las dos
+tarjetas OG. El «2 días» es esa misma cifra dicha de otra manera.
+
+## Cómo se describe el producto
+
+El ebook se cuenta **por el resultado**, no por las funciones: lo que se recupera, no la lista
+de botones. Las tres piezas del método —Proyectos, Skills y el trabajo sobre archivos reales—
+aparecen siempre con un ejemplo concreto de oficina. El cierre que lo diferencia: casi todo el
+mundo usa Claude como un buscador con buenos modales; acá se usa como alguien a quien se le
+delega, porque ya sabe cómo trabajas.
+
+**Los cursos gratis se nombran, pero no se enlazan.** Existen y sostienen el método —son
+dieciocho guías en cuatro niveles—, y por eso la página los usa como prueba de que el recorrido
+está probado. Enlazarlos desde acá sería mandar a la gente a leer gratis a mitad de la venta.
 
 ## Cómo se le habla a quien lee
 
 **Se tutea.** La página, los mensajes del formulario y el correo de confirmación tratan de **tú**
 a quien reserva: «reserva tu copia», «te llega por correo», «escríbenos». Conviene revisarlo al
-editar, porque el registro se rompe con una sola frase suelta en usted. La única aparición
-deliberada de «usted» es el ejemplo del pilar *Aprende tu forma de trabajar* («a los clientes se
-les trata de usted»): ahí la palabra es el criterio que el agente aprende, no la forma de hablarle
-a quien lee.
+editar, porque el registro se rompe con una sola frase suelta en usted.
 
 ## Los precios que aparecen
 
 | Precio | Qué es | Cómo se cobra |
 |---|---|---|
-| USD 25 / USD 50 | El ebook (lanzamiento / normal) | Formulario → n8n → link de pago por correo |
-| USD 2.500 | El Mac mini preconfigurado, con el equipo incluido | WhatsApp, fuera de la página |
-| USD 90 al mes | Plan gestionado opcional, con cobertura AppleCare | WhatsApp |
+| USD 25 / USD 50 | El ebook (lanzamiento / normal) | Formulario → n8n → link de pago, en la página y por correo |
+| Sin cifra | El taller en vivo para el equipo | WhatsApp, fuera de la página |
 
-La sección `#equipo` justifica los USD 2.500 en una línea: contra un piso declarado de **USD 800
-al mes** que cuesta esa carga administrativa, el equipo se paga **al cuarto mes** (2.500 ÷ 800 =
-3,1 meses, así que la frase es exacta). **Si cambia alguno de esos dos números hay que rehacer esa
-línea.** La comparación es contra el costo del trabajo repetitivo, no contra despedir a nadie: la
-página sostiene que el agente devuelve horas, y conviene no romper esa coherencia al editar.
+El taller **no lleva precio escrito a propósito**: depende del tamaño del área y del formato. Si
+alguna vez se le pone cifra, hay que agregarla también acá y revisar que el argumento de la
+sección siga en pie.
 
 ## Cómo está armado
 
@@ -61,8 +76,8 @@ docs/
   index.html          la página completa (la portada del ebook es un SVG inline)
   assets/styles.css   estilos
   assets/reserva.js   contador de cupos + envío del formulario
-  assets/og.png       imagen para compartir en redes (1200×630, generada como captura de un HTML)
-  assets/mac-mini-*.jpg  las tres fotos del equipo
+  assets/og.png       imagen para compartir en redes (1200×630, capturada del propio hero)
+  assets/fonts/       Space Grotesk y JetBrains Mono, servidas desde acá
   .nojekyll           por si alguna vez se vuelve a servir desde una rama
 .github/workflows/
   pages.yml           empaqueta docs/ y lo publica en Pages
@@ -72,32 +87,45 @@ n8n/
 
 ## El lenguaje visual
 
-La referencia es **apple.com**: fondo blanco alternado con gris `#f5f5f7`, texto `#1d1d1f`,
-azul `#0071e3` para la acción, naranjo `#bf4800` para el «Nuevo», botones en píldora,
-esquinas de 18 px y titulares grandes con tracking negativo.
+El sistema de diseño **no se inventó acá**: es el mismo de «Claude desde Cero» en
+[cristianignacio.me](https://cristianignacio.me/cursos/) —repo
+[`keepsync-hub/cristianignacio.me`](https://github.com/keepsync-hub/cristianignacio.me)—,
+copiado tal cual desde su `assets/css/style.css` para que las dos páginas se vean como una sola
+cosa. Minimalista en estructura, neo-brutalista en color y forma: crema `#faf4e6`, tinta
+`#16130d`, acentos planos (amarillo, rosa, cian, violeta, naranjo, lima), borde de 3 px, radio de
+14 px, sombra dura sin blur y una trama de puntos de fondo.
 
-La tipografía es la pila del sistema (`-apple-system` → SF Pro en un Mac, Helvetica o Arial
-en el resto). Se eligió así por dos razones: en el público de esta página —gente frente a un
-Mac— se ve exactamente como en apple.com, y no obliga a pedirle una fuente a un dominio
-externo, que es justo lo que la página promete no hacer.
+`styles.css` está partido en dos por eso mismo:
 
-### Las fotos y el color de las bandas
-
-Cada foto del Mac mini trae su propio fondo, y la banda que la contiene usa **ese mismo color**,
-así el equipo aparece recortado sobre la página, sin recuadro ni borde:
-
-| Foto | Fondo | Dónde va |
+| Parte | Qué es | Al editar |
 |---|---|---|
-| `mac-mini-superior.jpg` | `#f5f5f7` | Hero, dentro del recuadro gris |
-| `mac-mini-frente.jpg` | `#fcf7f4` | Banda «Por qué un Mac mini» (`.band-foto`) |
-| `mac-mini-escritorio.jpg` | `#f8f7f3` | Banda del caso real (`.band-foto-2`) |
+| **1. Sistema heredado** | El CSS de la referencia, sin tocar | Si el sistema cambia allá, se vuelve a copiar entero |
+| **2. Capa propia** | Formulario, oferta, contador, portada, FAQ, burbuja | Acá va todo lo que esta landing tiene y la referencia no |
 
-Los tres colores están en las variables `--bg-alt`, `--bg-foto` y `--bg-foto-2`. **Si se
-reemplaza una foto hay que actualizar su variable**, o aparecerá el recuadro.
+Dos ajustes deliberados sobre lo heredado: la pila tipográfica no nombra fuentes de sistema de
+ningún fabricante, y `.hp` —la trampa para bots— se oculta **fuera de pantalla** en vez de con
+`display:none`, que es como estaba armado el formulario de esta landing.
 
-Son imágenes de producto de Apple Inc., usadas para identificar el equipo; el pie de la página
-lo dice. Antes de una campaña pagada conviene revisar las condiciones de uso de material de
-Apple, o reemplazarlas por fotos propias del equipo que se entrega.
+### Las tipografías
+
+**Space Grotesk** (400-700, variable) y **JetBrains Mono** (600), en `.woff2` latin descargadas a
+`docs/assets/fonts/`: 44 KB entre las dos. Se sirven desde el propio sitio en vez de pedírselas a
+Google Fonts, para que la página siga sin depender de un dominio externo.
+
+Solo se bajó el subconjunto **latin**, que cubre el español completo (acentos, `ñ`, `¿`, `¡`, `«»`
+y las comillas y rayas tipográficas). **Si alguna vez se escribe algo fuera de ese rango**
+—griego, cirílico, vietnamita— hay que bajar también ese subconjunto o el texto caerá al
+fallback.
+
+### Las ilustraciones
+
+No hay fotos: las tres piezas gráficas —la semana del hero, la portada del ebook y el mark `C0`—
+son **SVG inline**, dibujadas con el mismo trazo de 3 px y los mismos acentos. No hay archivo que
+cargar, no hay logo de terceros y se pueden editar como texto.
+
+La semana del hero es la traducción visual de la tabla de las 16 horas: cinco días, tres con un
+bloque rosado (lo repetitivo) y dos enteros en verde (lo que vuelve). **Si cambia la cuenta,
+cambia el dibujo.**
 
 ## Publicar
 
@@ -107,6 +135,7 @@ se puede lanzar a mano desde la pestaña Actions.
 
 Para activarlo la primera vez hay que dejar **Settings → Pages → Source: GitHub Actions**
 (una sola vez; si quedara en "Deploy from a branch", el workflow falla al desplegar).
+**En este repo todavía no está activado.**
 
 Para trabajar localmente:
 
@@ -116,14 +145,14 @@ python3 -m http.server 8099 -d docs
 
 ## El backend de las reservas
 
-Un solo workflow de n8n, **Ebook IA Local Segura en Apple · Reservas (GitHub Pages)**, con dos rutas:
+Un solo workflow de n8n, **Ebook Claude desde Cero · Reservas (GitHub Pages)**, con dos rutas:
 
 | Ruta | Método | Devuelve |
 |---|---|---|
-| `/webhook/ebook-apple-ia/cupos` | GET | `{ total, tomados, restantes, precio, precio_normal }` |
-| `/webhook/ebook-apple-ia/reserva` | POST | `{ ok, estado, cupo, restantes, link_pago }` |
+| `/webhook/claude-desde-cero/cupos` | GET | `{ total, tomados, restantes, precio, precio_normal }` |
+| `/webhook/claude-desde-cero/reserva` | POST | `{ ok, estado, cupo, restantes, link_pago }` |
 
-Las reservas se guardan en la Data Table `reservas_ebook_apple_ia`, que es la fuente de verdad.
+Las reservas se guardan en la Data Table `reservas_claude_desde_cero`, que es la fuente de verdad.
 
 ### Los tres estados de una reserva
 
@@ -135,8 +164,8 @@ Las reservas se guardan en la Data Table `reservas_ebook_apple_ia`, que es la fu
 
 El guardado usa **upsert por correo**, así que el mismo correo dos veces actualiza su fila y
 nunca duplica. El nodo `Responder al navegador` va después de guardar y antes de Gmail: la
-persona recibe su confirmación rápido y un fallo de correo no le cuesta la reserva —y ahora
-tampoco le cuesta el pago, porque el link viaja en la respuesta del webhook, no solo en el correo.
+persona recibe su confirmación rápido y un fallo de correo no le cuesta la reserva —y tampoco
+le cuesta el pago, porque el link viaja en la respuesta del webhook, no solo en el correo.
 
 ### El salto al pago
 
@@ -150,6 +179,24 @@ en la constante `LINK_PAGO` como respaldo, y solo acepta la del servidor si vien
 **Si cambia el link de pago hay que cambiarlo en los dos lugares**: `LINK_PAGO` en
 `n8n/reserva-ebook.workflow.js` (que alimenta el correo y la respuesta) y `LINK_PAGO` en
 `docs/assets/reserva.js` (el respaldo).
+
+### El contrato entre la página y `reserva.js`
+
+`reserva.js` no se toca al editar el contenido, pero **depende del HTML**. Si se reescribe una
+sección, esto tiene que seguir existiendo o el formulario deja de funcionar en silencio:
+
+| Selector | Para qué |
+|---|---|
+| `form.reserva` (×2: hero y cierre) | los formularios que intercepta |
+| `form[data-origen]` | se envía como campo `origen` |
+| `nombre`, `email`, `website`, `consentimiento` | los campos del POST |
+| `[data-cupos]` (×2) | el texto del contador |
+| `.form-status` dentro del form | los mensajes de estado (`is-on` + `is-ok` / `is-wait` / `is-err`) |
+| `.btn-primary` dentro del form | se le cambia el texto y se deshabilita |
+| `.microcopy` dentro del form | se reemplaza cuando se agotan los cupos |
+
+El bloque de pago (`.pago`, `.pago-btn`, `.pago-aviso`) lo crea el script: en el CSS solo hay que
+tenerlo estilado.
 
 ### Anti-spam
 
@@ -165,16 +212,15 @@ La página lleva una burbuja fija de WhatsApp al número de contacto
 respaldo cuando el formulario falla, cuando el visitante tiene JavaScript
 desactivado, y la vía para pedir que se borren los datos.
 
-Hay **tres mensajes prellenados distintos** sobre el mismo número, para saber en la bandeja
+Hay **dos mensajes prellenados distintos** sobre el mismo número, para saber en la bandeja
 con qué intención llega cada persona:
 
 | Mensaje | Dónde está |
 |---|---|
 | «tengo una consulta» | Burbuja fija, pie de página, cierre y el `noscript` de los formularios |
-| «quiero el Mac mini configurado con el agente (USD 2.500)» | Botón de la sección `#equipo` y la última pregunta del FAQ |
-| «quiero saber del plan gestionado» | Enlace del plan, dentro de la sección `#equipo` |
+| «quiero cotizar el taller de Claude para mi equipo» | Botón de la sección `#taller` |
 
-Los tres se generan con `urllib.parse.quote` para no equivocarse con los acentos.
+Los dos van percent-encoded en el HTML para no equivocarse con los acentos.
 
 ### Si n8n no responde
 
@@ -184,14 +230,14 @@ reenviable y ofrece el WhatsApp del autor como respaldo.
 
 ## Estado
 
-**La landing está publicada y el backend está montado y activo.** El workflow
-`Ebook IA Local Segura en Apple · Reservas (GitHub Pages)` corre en n8n cloud:
+**El backend está montado y activo.** El workflow
+`Ebook Claude desde Cero · Reservas (GitHub Pages)` corre en n8n cloud:
 
 | Pieza | Valor |
 |---|---|
 | Workflow | `l3iJs9bH4XpqQAWh` — [abrir en n8n](https://keepsync-hub.app.n8n.cloud/workflow/l3iJs9bH4XpqQAWh) |
-| Data Table | `reservas_ebook_apple_ia` → `KPRHxEzOjaL3txG3` |
-| Credencial de correo | Gmail OAuth2 `cYhcyiH1LcyrXUWz`, remitente «IA Local Segura en Apple» |
+| Data Table | `reservas_claude_desde_cero` → `KPRHxEzOjaL3txG3` |
+| Credencial de correo | Gmail OAuth2 `cYhcyiH1LcyrXUWz`, remitente «Claude desde Cero» |
 | Link de pago | `https://www.webpay.cl/form-pay/420828` |
 
 El archivo `n8n/reserva-ebook.workflow.js` sigue siendo la fuente de verdad: es el
@@ -199,29 +245,27 @@ código con el que se creó el workflow, con el ID de la tabla ya pegado en `TAB
 **Si se edita el workflow desde la interfaz de n8n, hay que reflejar el cambio acá**,
 o la próxima importación pisa lo editado.
 
-### Cómo se verificó
+La Data Table **se renombró, no se recreó**: conserva el ID `KPRHxEzOjaL3txG3` y todas las filas
+que ya tenía.
 
-Primero ejecutando el workflow desde el servidor y después **por HTTP contra el webhook de
-producción**, que es la ruta que usa la landing de verdad:
+### Cómo se verificó el cambio de nombre
 
 | Prueba | Resultado |
 |---|---|
-| `GET /cupos` | `{ total: 20, tomados: 0, restantes: 20, precio: 25, precio_normal: 50 }` |
-| `POST /reserva` con la trampa `website` llena | `200 {"message":"Webhook call received"}` y **ninguna fila**: el filtro descarta antes de ejecutar un nodo |
-| `POST /reserva` con un correo mal formado | Igual: descartado |
-| `POST /reserva` válido | `{ ok: true, estado: "reservado", cupo: 1, restantes: 19, link_pago: "…420828" }`, fila guardada y correo enviado (Gmail lo devolvió con etiqueta `SENT`) |
-
-Ese `link_pago` de la respuesta es el que la página usa para mandar a pagar en el acto. Las
-filas de prueba se borraron después y el contador quedó en 20 de 20.
+| Contrato DOM en el navegador | Los dos `form.reserva`, los cuatro campos, los dos `[data-cupos]`, `.form-status`, `.btn-primary` y `.microcopy`: todos presentes |
+| Envío del formulario con n8n interceptado | POST con `{nombre, email, consentimiento, website, origen:"hero"}`, contador actualizado, botón **Pagar ahora USD 25** insertado |
+| Layout a 1440 px y a 390 px | Sin scroll horizontal en ninguno de los dos |
+| Dominios externos | Ninguno: solo el webhook, `wa.me` y Webpay |
+| Workflow de n8n con datos pinchados | `success`; correo generado con el nombre, el tuteo y la paleta nuevos, y `respuesta.link_pago` correcto |
 
 **Si pruebas el webhook con `curl` y te responde `403 Authorization data is wrong!`, no está
 roto**: el webhook lleva `ignoreBots: true` y el `User-Agent` de curl cae como bot. Con un
 `User-Agent` de navegador responde 200 normal:
 
 ```bash
-curl -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15" \
+curl -A "Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0" \
   -H "Origin: https://keepsync-hub.github.io" \
-  https://keepsync-hub.app.n8n.cloud/webhook/ebook-apple-ia/cupos
+  https://keepsync-hub.app.n8n.cloud/webhook/claude-desde-cero/cupos
 ```
 
 ### Lo único que no es automático
@@ -231,20 +275,21 @@ El pago **se valida a mano**: el formulario de Webpay no avisa de vuelta a n8n, 
 lo libere. Con 20 cupos eso se administra mirando la tabla; si el volumen crece, ahí sí
 conviene el workflow de conciliación que está más abajo.
 
-Para borrar filas de prueba hay un workflow desechable archivado en n8n
-(**Limpieza · filas de prueba (apple-ia)**), que borra lo que tenga `origen = prueba-tecnica`
-—un valor que ninguna reserva real puede traer, porque la landing manda `hero` o `cierre`—.
-Está archivado a propósito: para usarlo hay que desarchivarlo primero.
+Para borrar filas de prueba hay un workflow desechable archivado en n8n, que borra lo que tenga
+`origen = prueba-tecnica` —un valor que ninguna reserva real puede traer, porque la landing manda
+`hero` o `cierre`—. Está archivado a propósito: para usarlo hay que desarchivarlo primero.
 
 ## Pendiente (fase 2)
 
-- **Embudo propio para el equipo.** Hoy la venta de USD 2.500 sale por WhatsApp y no queda
-  registrada en ninguna parte. Medirla exigiría un segundo workflow y otra Data Table; se dejó
-  fuera a propósito, porque es una venta conversada y el formulario no la mejora.
-- **Fotos propias del equipo** en vez de las imágenes de producto de Apple, antes de invertir
-  en publicidad.
-- **Declarar entrega y plazo** en la página. Hoy dice "coordinamos entrega y plazo por WhatsApp",
-  que es honesto pero convierte peor que un plazo escrito.
+- **Activar Pages en este repo** (Settings → Pages → Source: GitHub Actions). Hasta que eso pase,
+  la URL canónica del `<head>` apunta a una página que todavía no existe.
+- **Renombrar el workflow de limpieza archivado en n8n**, que sigue llevando el nombre del
+  producto anterior.
+- **Embudo propio para el taller.** Hoy esa venta sale por WhatsApp y no queda registrada en
+  ninguna parte. Medirla exigiría un segundo workflow y otra Data Table; se dejó fuera a
+  propósito, porque es una venta conversada y el formulario no la mejora.
+- **Declarar formato, duración y precio del taller** en la página. Hoy dice "lo coordinamos por
+  WhatsApp", que es honesto pero convierte peor que un dato escrito.
 - Espejo de la Data Table a un Google Sheet, con un workflow programado aparte. Queda fuera
   del camino de la reserva a propósito: un fallo de credencial ahí no le cuesta una venta a
   nadie. Requiere crear una credencial de Google Sheets en n8n.

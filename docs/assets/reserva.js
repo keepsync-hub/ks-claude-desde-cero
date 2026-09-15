@@ -1,4 +1,4 @@
-/* Reservas del ebook "IA Local Segura en Apple".
+/* Reservas del ebook "Claude desde Cero".
  *
  * Un solo workflow de n8n atiende las dos rutas:
  *   GET  /cupos   -> { total, restantes, precio, precio_normal }  (contador del hero y del cierre)
@@ -15,7 +15,7 @@
 (function () {
   'use strict';
 
-  var BASE         = 'https://keepsync-hub.app.n8n.cloud/webhook/ebook-apple-ia';
+  var BASE         = 'https://keepsync-hub.app.n8n.cloud/webhook/claude-desde-cero';
   var URL_CUPOS    = BASE + '/cupos';
   var URL_RESERVA  = BASE + '/reserva';
 
