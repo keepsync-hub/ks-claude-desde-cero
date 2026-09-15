@@ -1,0 +1,582 @@
+/* IA Local Segura en Apple — landing de lanzamiento.
+   Sin frameworks ni recursos externos: todo lo que se carga vive en este repo.
+
+   El sistema visual sigue la referencia de apple.com: fondo blanco alternado con
+   gris #f5f5f7, texto casi negro, azul #0071e3 para la acción, botones en píldora,
+   esquinas de 18 px y la pila tipográfica del sistema (en un Mac eso es SF Pro,
+   que es justo el público de esta página; en el resto cae en Helvetica o Arial).
+   Nada de esto pide una fuente externa, así que la página sigue sin salir a
+   ningún dominio de terceros. */
+
+:root {
+  --bg:        #ffffff;
+  --bg-alt:    #f5f5f7;
+  /* Los dos cremas salen de las propias fotos del Mac mini: la banda toma el color
+     exacto del fondo de la imagen, así el equipo flota en la página sin recuadro. */
+  --bg-foto:   #fcf7f4;
+  --bg-foto-2: #f8f7f3;
+
+  --surface:   #ffffff;
+  --line:      #d2d2d7;
+  --line-soft: #e8e8ed;
+
+  --text:      #1d1d1f;
+  --muted:     #6e6e73;
+  --muted-dim: #86868b;
+
+  --accent:    #0071e3;
+  --accent-h:  #0077ed;
+  --accent-ink:#ffffff;
+  --link:      #0066cc;
+  --nuevo:     #bf4800;
+
+  --good:      #248a3d;
+  --bad:       #d70015;
+  --wa:        #25d366;
+
+  --wrap: 1120px;
+  --r:    18px;
+  --r-sm: 12px;
+  --pill: 980px;
+
+  --shadow:    0 4px 18px rgba(0,0,0,.06);
+  --shadow-lg: 0 18px 46px rgba(0,0,0,.12);
+
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+          "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 17px/1.47 var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 { line-height: 1.08; letter-spacing: -0.02em; margin: 0; font-weight: 700; }
+p  { margin: 0 0 1em; }
+a  { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+em { font-style: normal; color: var(--muted); }
+b, strong { font-weight: 600; }
+img { display: block; max-width: 100%; height: auto; }
+
+.wrap { width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: 22px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px;
+  padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 50;
+  background: var(--accent); color: var(--accent-ink);
+  padding: 12px 18px; border-radius: 0 0 var(--r-sm) 0; font-weight: 600;
+}
+.skip:focus { left: 0; }
+
+:where(a, button, input, summary):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+
+/* ───────────────────────────  barra superior  ───────────────────────────
+   Fina y translúcida, como la de Apple: no compite con el contenido y deja
+   ver que la página sigue corriendo por debajo. */
+
+.topbar {
+  position: sticky; top: 0; z-index: 30;
+  background: rgba(255,255,255,.72);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 52px; }
+
+.brand {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-size: 17px; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap;
+  color: var(--text);
+}
+.brand-mark { width: 22px; height: 22px; color: var(--accent); flex: none; }
+
+.topbar-cta {
+  background: var(--accent); color: var(--accent-ink);
+  font-size: 14px; font-weight: 500;
+  padding: 8px 16px; border-radius: var(--pill);
+}
+.topbar-cta:hover { background: var(--accent-h); text-decoration: none; }
+.topbar-cta b { font-weight: 600; }
+
+
+/* ───────────────────────────  hero  ─────────────────────────── */
+
+.hero { padding-block: 64px 84px; border-bottom: 1px solid var(--line-soft); }
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 56px;
+  align-items: start;
+}
+
+/* El "Nuevo" de Apple: naranja, sin caja y sin mayúsculas forzadas. */
+.eyebrow {
+  font-size: 19px; font-weight: 600; letter-spacing: -0.01em;
+  color: var(--nuevo); margin: 0 0 10px;
+}
+
+.hero h1 {
+  font-size: clamp(34px, 4vw, 48px);
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin-bottom: 22px;
+}
+
+.lead { font-size: clamp(17px, 1.5vw, 19px); color: var(--muted); max-width: 58ch; }
+
+.hero-points { list-style: none; margin: 26px 0 32px; padding: 0; display: grid; gap: 12px; }
+.hero-points li { position: relative; padding-left: 30px; color: var(--muted); font-size: 16px; }
+/* El visto: se dibuja con dos bordes girados, sin cargar un icono. */
+.hero-points li::before {
+  content: ""; position: absolute; left: 2px; top: .36em;
+  width: 13px; height: 7px;
+  border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent);
+  transform: rotate(-45deg);
+}
+
+/* ── bloque de oferta ── */
+
+.offer {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 22px;
+  background: var(--bg-alt);
+  border-radius: var(--r);
+  padding: 20px 24px;
+  margin-bottom: 30px;
+}
+.offer-price { display: flex; align-items: baseline; gap: 12px; }
+.price-old { font-size: 19px; color: var(--muted-dim); text-decoration: line-through; }
+.price-new { font-size: clamp(32px, 4vw, 40px); font-weight: 700; letter-spacing: -0.03em; }
+.offer-text { flex: 1 1 210px; }
+.offer-head { margin: 0 0 3px; font-size: 15px; }
+.offer-count { margin: 0; font-size: 14px; font-weight: 600; color: var(--accent); }
+
+/* ── formulario ── */
+
+.form-anchor { position: relative; top: -72px; }
+
+.reserva {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+.form-title { font-size: 22px; margin-bottom: 20px; }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+
+.field { display: block; }
+.field > span { display: block; font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 6px; }
+.field input {
+  width: 100%; font: inherit; font-size: 17px;
+  background: var(--bg); color: var(--text);
+  border: 1px solid var(--line); border-radius: var(--r-sm);
+  padding: 12px 14px;
+}
+.field input:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(0,113,227,.22); }
+.field input[aria-invalid="true"] { border-color: var(--bad); }
+
+/* Trampa para bots: fuera de la pantalla, nunca oculta con display:none
+   (hay bots que justamente buscan eso). */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.consent { display: flex; gap: 10px; align-items: flex-start; margin: 8px 0 20px; font-size: 14px; color: var(--muted); }
+.consent input { margin-top: 3px; accent-color: var(--accent); width: 16px; height: 16px; flex: none; }
+
+.btn-primary {
+  width: 100%; border: 0; cursor: pointer;
+  background: var(--accent); color: var(--accent-ink);
+  font: inherit; font-weight: 600; font-size: 17px;
+  padding: 14px 22px; border-radius: var(--pill);
+  transition: background .12s ease;
+}
+.btn-primary:hover { background: var(--accent-h); }
+.btn-primary[disabled] { opacity: .5; cursor: progress; }
+
+.btn-wa { background: var(--wa); color: #04220f; }
+.btn-wa:hover { background: var(--wa); filter: brightness(1.05); }
+.btn-wa svg { width: 20px; height: 20px; fill: currentColor; flex: none; }
+
+/* Algunos botones son enlaces y no botones de formulario: dejan de ocupar el
+   ancho completo y alinean su icono. */
+.franja-cta, .oferta-libro-cta {
+  width: auto;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  text-decoration: none;
+}
+.franja-cta:hover, .oferta-libro-cta:hover { text-decoration: none; }
+
+.microcopy { font-size: 13px; color: var(--muted-dim); margin: 14px 0 0; }
+
+/* ── el salto al pago ──
+   Lo inserta reserva.js bajo el estado del formulario, cuando la reserva ya
+   quedó guardada y solo falta pagar. */
+
+.pago { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
+.pago-btn { display: block; text-align: center; text-decoration: none; }
+.pago-btn:hover { text-decoration: none; }
+.pago-aviso { margin: 10px 0 0; font-size: 13px; color: var(--muted-dim); text-align: center; }
+
+.form-status { margin: 14px 0 0; font-size: 15px; font-weight: 500; display: none; }
+.form-status.is-on  { display: block; }
+.form-status.is-ok  { color: var(--good); }
+.form-status.is-wait{ color: var(--accent); }
+.form-status.is-err { color: var(--bad); }
+
+/* ── columna visual del hero: el equipo primero, el libro después ── */
+
+.hero-visual { position: sticky; top: 82px; display: grid; gap: 20px; }
+
+/* La foto superior del Mac mini ya viene sobre #f5f5f7, el mismo gris de Apple:
+   el recuadro toma ese color y la unión no se nota. */
+.foto-tile {
+  margin: 0;
+  background: var(--bg-alt);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.foto-tile img { width: 100%; }
+.foto-tile figcaption {
+  padding: 0 22px 20px;
+  font-size: 14px; color: var(--muted-dim); text-align: center;
+}
+
+.hero-extra {
+  border: 1px solid var(--line); border-radius: var(--r);
+  padding: 22px 24px;
+}
+.hero-extra h2 { font-size: 19px; margin-bottom: 8px; }
+.hero-extra p { color: var(--muted); font-size: 15px; margin-bottom: 12px; }
+.hero-extra a { font-size: 15px; font-weight: 500; }
+.hero-extra a span { display: inline-block; margin-left: 2px; }
+
+/* ── la portada del ebook, junto al índice ── */
+
+.libro-grid { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 48px; align-items: start; }
+.libro-lado { display: grid; gap: 22px; }
+.libro-portada { text-align: center; }
+
+.book {
+  position: relative; display: inline-block;
+  transform: perspective(1500px) rotateY(-13deg) rotateX(2deg);
+  filter: drop-shadow(0 26px 44px rgba(0,0,0,.26));
+}
+.book-face { display: block; width: min(268px, 70vw); height: auto; border-radius: 3px 7px 7px 3px; }
+.book-edge {
+  position: absolute; inset: 0 auto 0 100%;
+  width: 12px;
+  background: linear-gradient(90deg, #c7c7cc, #fff 45%, #c7c7cc);
+  border-radius: 0 3px 3px 0;
+  transform: rotateY(24deg); transform-origin: left center;
+}
+.cover-note { margin: 26px 0 0; font-size: 14px; color: var(--muted); }
+.cover-note-extra { margin: 18px 0 0; }
+.cover-note b { display: block; color: var(--text); font-size: 15px; margin-bottom: 2px; }
+
+
+/* ───────────────────────────  bandas  ─────────────────────────── */
+
+.band { padding-block: 92px; }
+.band-alt { background: var(--bg-alt); }
+
+.kicker {
+  font-size: 15px; font-weight: 600; letter-spacing: 0;
+  color: var(--muted-dim); margin: 0 0 10px;
+  text-transform: none;
+}
+.h2 { font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.025em; margin-bottom: 20px; max-width: 26ch; }
+.band-lead { font-size: 19px; color: var(--muted); max-width: 68ch; margin-bottom: 38px; }
+
+.band-foot {
+  margin-top: 34px; padding: 20px 24px;
+  background: rgba(0,0,0,.04);
+  border-radius: var(--r);
+  color: var(--muted); font-size: 16px;
+}
+
+/* ── fotos a lo ancho de una banda ── */
+
+.band-foto  { background: var(--bg-foto); }
+.band-foto-2{ background: var(--bg-foto-2); }
+
+/* La foto trae su propio fondo y la banda usa ese mismo color, así que el
+   equipo aparece recortado sobre la página, sin borde ni recuadro. */
+.foto-ancha { margin: 0 0 46px; }
+.foto-ancha img { width: 100%; max-width: 900px; margin-inline: auto; }
+.foto-ancha figcaption {
+  max-width: 620px; margin: 6px auto 0;
+  text-align: center; font-size: 15px; color: var(--muted);
+}
+.foto-caso { margin: 34px 0 0; }
+.foto-caso img { border-radius: var(--r); }
+
+/* ── contraste ── */
+
+.contrast { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r); padding: 30px;
+}
+.card h3 { margin-bottom: 16px; }
+.card p { color: var(--muted); }
+.card ul { margin: 18px 0 0; padding-left: 20px; color: var(--muted); display: grid; gap: 8px; font-size: 15px; }
+.card-bad  { border-color: rgba(215,0,21,.22); }
+.card-good { border-color: rgba(36,138,61,.28); }
+
+.tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; padding: 5px 11px; border-radius: var(--pill); }
+.tag-bad  { color: var(--bad);  background: rgba(215,0,21,.08); }
+.tag-good { color: var(--good); background: rgba(36,138,61,.1); }
+
+/* ── pasos ── */
+
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.steps li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 28px; }
+.band-alt .steps li { border-color: transparent; }
+.step-n {
+  display: inline-grid; place-items: center;
+  width: 34px; height: 34px; border-radius: 50%; margin-bottom: 16px;
+  background: var(--accent); color: var(--accent-ink); font-weight: 600; font-size: 16px;
+}
+.steps h3 { font-size: 19px; margin-bottom: 10px; }
+.steps p { color: var(--muted); font-size: 15px; margin: 0; }
+
+/* ── los tres pilares del agente ── */
+
+.pilares { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.pilar {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r); padding: 30px;
+}
+.pilar h3 { font-size: 21px; margin-bottom: 12px; }
+.pilar p { color: var(--muted); font-size: 15.5px; }
+.pilar-ej {
+  margin: 18px 0 0; padding-top: 16px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 14.5px;
+}
+
+/* ── tabla ── */
+
+.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); }
+.iso { width: 100%; min-width: 660px; border-collapse: collapse; font-size: 15px; }
+.iso thead th {
+  text-align: left; font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--muted-dim); background: var(--bg-alt); padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+}
+.iso tbody th {
+  text-align: left; font-weight: 600; color: var(--text);
+  padding: 16px 18px; vertical-align: top; white-space: nowrap;
+}
+.iso td { padding: 16px 18px; color: var(--muted); vertical-align: top; }
+.iso tbody tr + tr th, .iso tbody tr + tr td { border-top: 1px solid var(--line-soft); }
+
+/* ── caso ── */
+
+.case { max-width: 780px; }
+.case p { color: var(--muted); font-size: 18px; }
+.case blockquote {
+  margin: 30px 0 0; padding: 24px 28px;
+  background: var(--surface); border-radius: var(--r);
+  box-shadow: var(--shadow);
+}
+.case blockquote p { margin: 0; font-size: 17px; }
+
+/* ── índice ── */
+
+.toc { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.toc li {
+  display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 4px 18px; align-items: baseline;
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+}
+.toc li:last-child { border-bottom: 1px solid var(--line); }
+.toc b { font-size: 17px; font-weight: 600; }
+.toc li > span:last-child { grid-column: 2; color: var(--muted); font-size: 15px; }
+.route {
+  grid-row: span 2; align-self: start;
+  font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+  padding: 5px 9px; border-radius: var(--pill); text-align: center;
+}
+.route-exec { color: #8944ab; background: rgba(137,68,171,.1); }
+.route-tech { color: var(--link); background: rgba(0,102,204,.1); }
+.route-both { color: var(--good); background: rgba(36,138,61,.1); }
+
+/* ── FAQ ── */
+
+.faq { display: grid; gap: 0; max-width: 860px; }
+.faq details { border-top: 1px solid var(--line); }
+.faq details:last-child { border-bottom: 1px solid var(--line); }
+.faq summary {
+  cursor: pointer; list-style: none; padding: 20px 34px 20px 0; position: relative;
+  font-weight: 500; font-size: 17px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+  color: var(--accent); font-size: 24px; font-weight: 300; line-height: 1;
+}
+.faq details[open] summary::after { content: "\2013"; }
+.faq p { color: var(--muted); margin: 0 0 20px; font-size: 16px; max-width: 72ch; }
+
+/* ── cierre ── */
+
+.band-close { background: var(--bg-alt); }
+.close { max-width: 680px; margin-inline: auto; text-align: center; }
+.close .h2 { max-width: none; }
+.close-lead { color: var(--muted); font-size: 19px; margin-bottom: 30px; max-width: 56ch; margin-inline: auto; }
+.close .reserva { text-align: left; }
+.close-nota { margin-top: 22px; }
+
+/* ── footer ── */
+
+.footer { background: var(--bg-alt); padding-block: 38px 48px; border-top: 1px solid var(--line); }
+.footer-in { display: grid; gap: 12px; }
+.footer-note { color: var(--muted-dim); font-size: 13px; max-width: 76ch; margin: 0; }
+
+
+/* ───────────────────────  mapa de controles ISO  ───────────────────────
+   Va bajo la tabla de la plataforma: la tabla explica qué trae el equipo,
+   esta lista traduce eso al lenguaje del Anexo A. */
+
+.sub-h3 { font-size: clamp(21px, 2.2vw, 26px); margin: 52px 0 14px; }
+
+.mapa { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; max-width: 900px; }
+.mapa li {
+  display: grid; grid-template-columns: 84px 1fr; gap: 16px; align-items: start;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r-sm); padding: 15px 18px;
+}
+.mapa b {
+  font-size: 13px; font-weight: 600; letter-spacing: .03em;
+  color: var(--link); background: rgba(0,102,204,.09);
+  border-radius: var(--pill); padding: 4px 0; text-align: center;
+}
+.mapa span { color: var(--muted); font-size: 15px; }
+
+
+/* ───────────────────────  el equipo preconfigurado  ───────────────────────
+   La alternativa para quien no quiere armarlo. No se vende en la página —se
+   cotiza por WhatsApp—, así que es una sola tarjeta y no compite con el libro. */
+
+.franja {
+  display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r); overflow: hidden;
+}
+.franja-texto { padding: 36px; }
+.franja-precio { background: var(--bg-alt); padding: 36px; border-left: 1px solid var(--line); }
+
+.oferta-tag { font-size: 14px; font-weight: 600; color: var(--muted-dim); margin: 0 0 8px; }
+.franja-texto .h2 { font-size: clamp(24px, 2.8vw, 32px); margin-bottom: 16px; }
+.oferta-lead { color: var(--muted); margin-bottom: 22px; }
+
+.incluye { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.incluye li { position: relative; padding-left: 28px; color: var(--muted); font-size: 15px; }
+.incluye li::before {
+  content: ""; position: absolute; left: 3px; top: .34em;
+  width: 12px; height: 6px;
+  border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent);
+  transform: rotate(-45deg);
+}
+
+.oferta-precio { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.oferta-precio b { font-size: clamp(32px, 3.6vw, 38px); font-weight: 700; letter-spacing: -0.03em; }
+.oferta-precio span { font-size: 14px; color: var(--muted); }
+
+.franja-cuenta { font-size: 14.5px; color: var(--muted); margin-bottom: 22px; }
+.oferta-nota { font-size: 13px; color: var(--muted-dim); margin: 14px 0 0; }
+
+
+/* ───────────────────────  burbuja de WhatsApp  ───────────────────────
+   Canal directo de contacto. Va fija sobre la página porque la duda que
+   frena una compra de este tipo aparece leyendo, no al final. */
+
+.wa {
+  position: fixed; right: 20px; bottom: 20px; z-index: 40;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px; border-radius: var(--pill);
+  background: var(--wa); color: #04220f;
+  font-weight: 600; font-size: 15px; line-height: 1;
+  box-shadow: 0 8px 26px rgba(0,0,0,.18);
+  transition: transform .14s ease, filter .14s ease;
+}
+.wa:hover  { filter: brightness(1.05); transform: translateY(-2px); text-decoration: none; }
+.wa:active { transform: translateY(0); }
+.wa-icon { width: 30px; height: 30px; fill: #04220f; flex: none; }
+.wa-texto { padding-right: 8px; white-space: nowrap; }
+
+
+/* ───────────────────────────  responsive  ─────────────────────────── */
+
+@media (max-width: 940px) {
+  /* El titular es el gancho: en pantallas angostas va primero y la foto del
+     equipo cierra el bloque, en vez de empujar todo bajo el pliegue. */
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-visual { position: static; }
+  .contrast, .steps, .pilares { grid-template-columns: 1fr; }
+  .franja { grid-template-columns: 1fr; }
+  .franja-precio { border-left: 0; border-top: 1px solid var(--line); }
+  /* El libro cambia de orden: primero la portada y el precio, después el índice. */
+  .libro-grid { grid-template-columns: 1fr; gap: 34px; }
+  .libro-lado { order: -1; }
+  .band { padding-block: 68px; }
+}
+
+@media (max-width: 620px) {
+  /* Desde acá el precio sale del botón de la barra: marca y precio juntos
+     ya no caben en una sola línea. */
+  .brand { font-size: 15px; }
+  .topbar-cta { font-size: 13px; padding: 7px 14px; }
+  .cta-precio { display: none; }
+  /* En pantalla angosta la etiqueta estorba al botón del formulario: solo el círculo. */
+  .wa { right: 14px; bottom: 14px; gap: 0; }
+  .wa-texto { display: none; }
+}
+
+@media (max-width: 420px) {
+  .brand { font-size: 14px; }
+  .hero { padding-block: 44px 58px; }
+  .band { padding-block: 56px; }
+  .field-row { grid-template-columns: 1fr; }
+  .reserva, .pilar, .card { padding: 22px; }
+  .franja-texto, .franja-precio { padding: 24px; }
+  .offer { gap: 14px; padding: 18px; }
+  .toc li { grid-template-columns: 1fr; }
+  .route { grid-row: auto; justify-self: start; margin-bottom: 6px; }
+  .toc li > span:last-child { grid-column: 1; }
+  .mapa li { grid-template-columns: 1fr; gap: 8px; }
+  .mapa b { justify-self: start; padding: 4px 12px; }
+  .h2 { max-width: none; }
+}
+
+@media (max-width: 360px) {
+  /* Pantallas muy angostas: el título ya no cabe junto al botón. */
+  .brand-mark { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
