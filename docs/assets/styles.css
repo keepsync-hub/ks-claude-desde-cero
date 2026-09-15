@@ -1,582 +1,849 @@
-/* IA Local Segura en Apple — landing de lanzamiento.
-   Sin frameworks ni recursos externos: todo lo que se carga vive en este repo.
+/* Claude desde Cero — landing del ebook.
+   ---------------------------------------------------------------------------
+   El sistema de diseño no se inventó acá: es el mismo de «Claude desde Cero»
+   en cristianignacio.me (keepsync-hub/cristianignacio.me), copiado tal cual
+   para que las dos páginas se vean como una sola cosa. Minimalista en
+   estructura, neo-brutalista en color y forma: crema, tinta casi negra,
+   acentos planos, borde de 3 px y sombra dura sin blur.
 
-   El sistema visual sigue la referencia de apple.com: fondo blanco alternado con
-   gris #f5f5f7, texto casi negro, azul #0071e3 para la acción, botones en píldora,
-   esquinas de 18 px y la pila tipográfica del sistema (en un Mac eso es SF Pro,
-   que es justo el público de esta página; en el resto cae en Helvetica o Arial).
-   Nada de esto pide una fuente externa, así que la página sigue sin salir a
-   ningún dominio de terceros. */
+   Si el sistema cambia allá, este bloque se vuelve a copiar de
+   https://cristianignacio.me/assets/css/style.css y listo. Lo propio de esta
+   página —formulario de reserva, oferta, contador, portada del ebook, FAQ—
+   va al final, en su propia capa, para no mezclarse con lo heredado.
 
-:root {
-  --bg:        #ffffff;
-  --bg-alt:    #f5f5f7;
-  /* Los dos cremas salen de las propias fotos del Mac mini: la banda toma el color
-     exacto del fondo de la imagen, así el equipo flota en la página sin recuadro. */
-  --bg-foto:   #fcf7f4;
-  --bg-foto-2: #f8f7f3;
+   Las dos fuentes se sirven desde assets/fonts/: la página no le pide un solo
+   archivo a un dominio externo.
+   --------------------------------------------------------------------------- */
 
-  --surface:   #ffffff;
-  --line:      #d2d2d7;
-  --line-soft: #e8e8ed;
-
-  --text:      #1d1d1f;
-  --muted:     #6e6e73;
-  --muted-dim: #86868b;
-
-  --accent:    #0071e3;
-  --accent-h:  #0077ed;
-  --accent-ink:#ffffff;
-  --link:      #0066cc;
-  --nuevo:     #bf4800;
-
-  --good:      #248a3d;
-  --bad:       #d70015;
-  --wa:        #25d366;
-
-  --wrap: 1120px;
-  --r:    18px;
-  --r-sm: 12px;
-  --pill: 980px;
-
-  --shadow:    0 4px 18px rgba(0,0,0,.06);
-  --shadow-lg: 0 18px 46px rgba(0,0,0,.12);
-
-  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
-          "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-  color-scheme: light;
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("fonts/space-grotesk-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-* { box-sizing: border-box; }
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/jetbrains-mono-600-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* =========================================================================
+   1. Sistema heredado de «Claude desde Cero»
+   ========================================================================= */
+
+:root {
+  /* Paleta neo-brutalista */
+  --bg:        #faf4e6;  /* crema cálido */
+  --ink:       #16130d;  /* casi negro */
+  --paper:     #ffffff;
+
+  --yellow:    #ffd23f;
+  --pink:      #ff5c8a;
+  --cyan:      #36d6c3;
+  --violet:    #8b6cff;
+  --orange:    #ff7a3c;
+  --lime:      #b8f24a;
+
+  /* Sistema brutalista: borde grueso + sombra dura sin blur */
+  --border-w:  3px;
+  --radius:    14px;
+  --shadow:    6px 6px 0 0 var(--ink);
+  --shadow-sm: 4px 4px 0 0 var(--ink);
+  --shadow-lg: 10px 10px 0 0 var(--ink);
+
+  --font-sans: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+  --maxw: 1080px;
+}
+
+/* ----------------------------------------------------------------- Reset */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+* { margin: 0; }
 
 html { scroll-behavior: smooth; }
 
 body {
-  margin: 0;
+  font-family: var(--font-sans);
   background: var(--bg);
-  color: var(--text);
-  font: 400 17px/1.47 var(--font);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 18px;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* trama sutil de puntos para textura brutalista discreta */
+  background-image: radial-gradient(var(--ink) 0.6px, transparent 0.6px);
+  background-size: 28px 28px;
+  background-attachment: fixed;
+  background-position: -2px -2px;
 }
 
-h1, h2, h3 { line-height: 1.08; letter-spacing: -0.02em; margin: 0; font-weight: 700; }
-p  { margin: 0 0 1em; }
-a  { color: var(--link); text-decoration: none; }
-a:hover { text-decoration: underline; }
-em { font-style: normal; color: var(--muted); }
-b, strong { font-weight: 600; }
-img { display: block; max-width: 100%; height: auto; }
+img { max-width: 100%; display: block; }
 
-.wrap { width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: 22px; }
+a { color: inherit; }
 
-.sr-only {
-  position: absolute; width: 1px; height: 1px; margin: -1px;
-  padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+/* --------------------------------------------------------------- Layout */
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: 24px;
 }
 
-.skip {
-  position: absolute; left: -9999px; top: 0; z-index: 50;
-  background: var(--accent); color: var(--accent-ink);
-  padding: 12px 18px; border-radius: 0 0 var(--r-sm) 0; font-weight: 600;
-}
-.skip:focus { left: 0; }
+.section { padding-block: 72px; }
 
-:where(a, button, input, summary):focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 4px;
+.stack > * + * { margin-top: 1rem; }
+
+/* ------------------------------------------------------------ Tipografía */
+h1, h2, h3, h4 {
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
+h1 { font-size: clamp(2.6rem, 7vw, 5rem); }
+h2 { font-size: clamp(2rem, 4.5vw, 3rem); }
+h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
 
-/* ───────────────────────────  barra superior  ───────────────────────────
-   Fina y translúcida, como la de Apple: no compite con el contenido y deja
-   ver que la página sigue corriendo por debajo. */
+p  { max-width: 62ch; }
 
-.topbar {
-  position: sticky; top: 0; z-index: 30;
-  background: rgba(255,255,255,.72);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid var(--line);
+.lead { font-size: clamp(1.1rem, 2vw, 1.35rem); }
+
+.mono { font-family: var(--font-mono); }
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 6px 12px;
+  border-radius: 999px;
 }
-.topbar-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 52px; }
+
+mark {
+  background: var(--yellow);
+  padding: 0 0.18em;
+  box-decoration-break: clone;
+}
+
+/* ------------------------------------------------------------- Navbar */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: var(--border-w) solid var(--ink);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 14px;
+}
 
 .brand {
-  display: inline-flex; align-items: center; gap: 9px;
-  font-size: 17px; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap;
-  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.05rem;
 }
-.brand-mark { width: 22px; height: 22px; color: var(--accent); flex: none; }
 
-.topbar-cta {
-  background: var(--accent); color: var(--accent-ink);
-  font-size: 14px; font-weight: 500;
-  padding: 8px 16px; border-radius: var(--pill);
-}
-.topbar-cta:hover { background: var(--accent-h); text-decoration: none; }
-.topbar-cta b { font-weight: 600; }
-
-
-/* ───────────────────────────  hero  ─────────────────────────── */
-
-.hero { padding-block: 64px 84px; border-bottom: 1px solid var(--line-soft); }
-
-.hero-grid {
+.brand__mark {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  background: var(--orange);
+  border: var(--border-w) solid var(--ink);
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+}
+
+.nav__links a {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: var(--border-w) solid transparent;
+}
+
+.nav__links a:hover {
+  border-color: var(--ink);
+  background: var(--paper);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --------------------------------------------------------------- Botones */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 14px 22px;
+  background: var(--paper);
+  color: var(--ink);
+  border: var(--border-w) solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.btn:hover  { transform: translate(-2px, -2px); box-shadow: var(--shadow-lg); }
+.btn:active { transform: translate(3px, 3px);  box-shadow: 2px 2px 0 0 var(--ink); }
+
+.btn--primary { background: var(--yellow); }
+.btn--pink    { background: var(--pink); }
+.btn--cyan    { background: var(--cyan); }
+.btn--violet  { background: var(--violet); color: var(--paper); }
+
+/* ----------------------------------------------------------------- Hero */
+.hero { padding-block: 84px 64px; }
+
+.hero h1 { margin-bottom: 22px; }
+
+.hero .lead { margin-bottom: 32px; }
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.chip {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  background: var(--paper);
+  border: var(--border-w) solid var(--ink);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ----------------------------------------------------------- Tarjetas */
+.grid {
+  display: grid;
+  gap: 24px;
+}
+
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+.grid--2 { grid-template-columns: repeat(2, 1fr); }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--paper);
+  border: var(--border-w) solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+a.card { text-decoration: none; }
+
+a.card:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-lg); }
+
+.card__icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: var(--border-w) solid var(--ink);
+  border-radius: 12px;
+  font-size: 1.5rem;
+}
+
+.card h3 { margin-top: 4px; }
+
+.card p { font-size: 0.98rem; color: #2c281f; }
+
+.card__meta {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+}
+
+.tag {
+  padding: 4px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* colores rotativos para iconos/acentos */
+.c-yellow { background: var(--yellow); }
+.c-pink   { background: var(--pink); }
+.c-cyan   { background: var(--cyan); }
+.c-violet { background: var(--violet); color: var(--paper); }
+.c-orange { background: var(--orange); }
+.c-lime   { background: var(--lime); }
+
+/* --------------------------------------------------------- Panel / pasos */
+.panel {
+  background: var(--paper);
+  border: var(--border-w) solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 36px;
+}
+
+.steps {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+  counter-reset: step;
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  background: var(--cyan);
+  border: var(--border-w) solid var(--ink);
+  border-radius: 12px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ----------------------------------------------------------- CTA banda */
+.band {
+  background: var(--violet);
+  border-block: var(--border-w) solid var(--ink);
+  color: var(--paper);
+}
+
+.band .panel {
+  background: var(--ink);
+  color: var(--bg);
+  text-align: center;
+  border-color: var(--bg);
+}
+
+/* ------------------------------------------------------------- Footer */
+.footer {
+  border-top: var(--border-w) solid var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+  padding-block: 40px;
+}
+
+.footer a { color: var(--yellow); }
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ---------------------------------------------------- Página de contenido */
+.article {
+  background: var(--paper);
+  border: var(--border-w) solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(28px, 5vw, 56px);
+  margin-block: 48px;
+}
+
+.article > * + * { margin-top: 1.1rem; }
+
+.article h2 { margin-top: 2rem; }
+.article h3 { margin-top: 1.6rem; }
+
+.article ul, .article ol { padding-left: 1.4rem; }
+.article li + li { margin-top: 0.4rem; }
+
+.article pre {
+  background: var(--ink);
+  color: #f3eee1;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  padding: 20px;
+  border-radius: var(--radius);
+  overflow-x: auto;
+  border: var(--border-w) solid var(--ink);
+}
+
+.article code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--yellow);
+  padding: 0.1em 0.35em;
+  border-radius: 6px;
+}
+
+.article pre code { background: none; padding: 0; color: inherit; }
+
+/* Tablas dentro del artículo */
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 1.1rem;
+  border: var(--border-w) solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.article table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92rem;
+}
+
+.article th,
+.article td {
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--ink);
+  border-right: 2px solid var(--ink);
+  vertical-align: top;
+}
+
+.article th:last-child,
+.article td:last-child { border-right: 0; }
+
+.article tbody tr:last-child td { border-bottom: 0; }
+
+.article thead {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.article thead th {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.article tbody tr:nth-child(even) { background: #fbf7ec; }
+
+.article td code { font-size: 0.82em; }
+
+.article blockquote {
+  border-left: 6px solid var(--pink);
+  background: #fff6f9;
+  padding: 14px 20px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-style: italic;
+}
+
+.breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  margin-top: 32px;
+}
+
+.breadcrumb a { text-decoration: none; font-weight: 600; }
+.breadcrumb a:hover { text-decoration: underline; }
+
+.callout {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--lime);
+  border: var(--border-w) solid var(--ink);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.callout strong { display: block; }
+
+/* ---------------------------------------------------------- Formularios */
+.field { display: grid; gap: 8px; }
+
+.field + .field { margin-top: 18px; }
+
+.field label {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.input {
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--bg);
+  padding: 14px 16px;
+  border: var(--border-w) solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+}
+
+.input:focus {
+  outline: none;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+
+
+/* --------------------------------------------------------------- Utils */
+.center      { text-align: center; }
+.mt-0        { margin-top: 0 !important; }
+.section-head { max-width: 60ch; margin-bottom: 40px; }
+.section-head .eyebrow { margin-bottom: 16px; }
+
+/* --------------------------------------------------------- Responsive */
+@media (max-width: 860px) {
+  .grid--3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 620px) {
+  body { font-size: 17px; }
+  .grid--3, .grid--2 { grid-template-columns: 1fr; }
+  .nav__links { display: none; }
+  .nav__links.is-open {
+    display: flex;
+    position: absolute;
+    inset: 100% 0 auto 0;
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--bg);
+    border-bottom: var(--border-w) solid var(--ink);
+    padding: 16px 24px;
+    gap: 6px;
+  }
+  .section { padding-block: 56px; }
+}
+
+/* botón menú (solo móvil) */
+.nav__toggle {
+  display: none;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  background: var(--yellow);
+  border: var(--border-w) solid var(--ink);
+  border-radius: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 620px) {
+  .nav__toggle { display: inline-block; }
+  .nav__inner { position: relative; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto; }
+}
+
+/* =========================================================================
+   2. Capa propia de la landing
+   Lo que esta página tiene y la referencia no: el formulario de reserva y su
+   ciclo de vida, el bloque de oferta, el contador de cupos, la portada del
+   ebook, el FAQ y la burbuja de WhatsApp. Todo construido con los mismos
+   tokens de arriba, para que no se note la costura.
+   ========================================================================= */
+
+/* ------------------------------------------------- accesibilidad y anclas */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+
+/* El salto al formulario: invisible hasta que alguien llega con el tabulador. */
+.skip {
+  position: absolute; left: 16px; top: -100px; z-index: 100;
+  background: var(--yellow); color: var(--ink);
+  border: var(--border-w) solid var(--ink); border-radius: 10px;
+  padding: 10px 16px; font-weight: 700; text-decoration: none;
+  box-shadow: var(--shadow-sm);
+}
+.skip:focus { top: 16px; }
+
+/* La barra es fija, así que el ancla tiene que quedar más arriba o el título
+   del formulario se esconde debajo. */
+.form-anchor { position: relative; top: -84px; }
+
+:target { scroll-margin-top: 90px; }
+
+/* ------------------------------------------------------------ barra fija */
+.nav__cta {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-weight: 700; font-size: 0.95rem; text-decoration: none;
+  padding: 10px 16px;
+  background: var(--yellow); color: var(--ink);
+  border: var(--border-w) solid var(--ink); border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+.nav__cta:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow); }
+
+/* En móvil el precio sobra: lo que importa es el verbo. */
+@media (max-width: 620px) { .nav__cta .cta-precio { display: none; } }
+
+/* ------------------------------------------------------------------ hero */
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: 56px;
   align-items: start;
 }
 
-/* El "Nuevo" de Apple: naranja, sin caja y sin mayúsculas forzadas. */
-.eyebrow {
-  font-size: 19px; font-weight: 600; letter-spacing: -0.01em;
-  color: var(--nuevo); margin: 0 0 10px;
+.hero__aside { position: sticky; top: 96px; display: grid; gap: 22px; }
+
+.hero h1 em { font-style: normal; background: var(--yellow); box-decoration-break: clone; padding: 0 0.12em; }
+
+.hero__points { list-style: none; padding: 0; margin: 28px 0 32px; display: grid; gap: 14px; }
+
+.hero__points li {
+  position: relative; padding-left: 44px; min-height: 30px;
+  font-size: 1rem;
 }
 
-.hero h1 {
-  font-size: clamp(34px, 4vw, 48px);
-  letter-spacing: -0.025em;
-  line-height: 1.05;
-  margin-bottom: 22px;
+/* El visto se dibuja con un pseudo-elemento: un icono menos que cargar. */
+.hero__points li::before {
+  content: "✓";
+  position: absolute; left: 0; top: 0;
+  display: grid; place-items: center;
+  width: 30px; height: 30px;
+  background: var(--lime); border: 2px solid var(--ink); border-radius: 8px;
+  font-weight: 700; font-size: 0.9rem;
 }
 
-.lead { font-size: clamp(17px, 1.5vw, 19px); color: var(--muted); max-width: 58ch; }
-
-.hero-points { list-style: none; margin: 26px 0 32px; padding: 0; display: grid; gap: 12px; }
-.hero-points li { position: relative; padding-left: 30px; color: var(--muted); font-size: 16px; }
-/* El visto: se dibuja con dos bordes girados, sin cargar un icono. */
-.hero-points li::before {
-  content: ""; position: absolute; left: 2px; top: .36em;
-  width: 13px; height: 7px;
-  border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent);
-  transform: rotate(-45deg);
-}
-
-/* ── bloque de oferta ── */
-
+/* ----------------------------------------------------- bloque de oferta */
 .offer {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 22px;
-  background: var(--bg-alt);
-  border-radius: var(--r);
-  padding: 20px 24px;
-  margin-bottom: 30px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 20px;
+  background: var(--cyan);
+  border: var(--border-w) solid var(--ink); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 20px 24px; margin-bottom: 24px;
 }
+
 .offer-price { display: flex; align-items: baseline; gap: 12px; }
-.price-old { font-size: 19px; color: var(--muted-dim); text-decoration: line-through; }
-.price-new { font-size: clamp(32px, 4vw, 40px); font-weight: 700; letter-spacing: -0.03em; }
-.offer-text { flex: 1 1 210px; }
-.offer-head { margin: 0 0 3px; font-size: 15px; }
-.offer-count { margin: 0; font-size: 14px; font-weight: 600; color: var(--accent); }
+.price-old { font-family: var(--font-mono); font-size: 1.05rem; text-decoration: line-through; opacity: 0.65; }
+.price-new { font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
 
-/* ── formulario ── */
+.offer-text { flex: 1 1 220px; }
+.offer-head { font-size: 0.95rem; margin: 0 0 4px; }
+.offer-count { margin: 0; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; }
 
-.form-anchor { position: relative; top: -72px; }
-
+/* -------------------------------------------------- formulario de reserva */
 .reserva {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  padding: 28px;
-  box-shadow: var(--shadow);
+  background: var(--paper);
+  border: var(--border-w) solid var(--ink); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 28px;
 }
-.form-title { font-size: 22px; margin-bottom: 20px; }
 
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.form-title { font-size: 1.35rem; margin-bottom: 22px; }
 
-.field { display: block; }
-.field > span { display: block; font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 6px; }
-.field input {
-  width: 100%; font: inherit; font-size: 17px;
-  background: var(--bg); color: var(--text);
-  border: 1px solid var(--line); border-radius: var(--r-sm);
-  padding: 12px 14px;
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field-row + .field { margin-top: 18px; }
+
+@media (max-width: 620px) { .field-row { grid-template-columns: 1fr; } }
+
+.field input[aria-invalid="true"] { border-color: #b3123f; background: #fff2f5; }
+
+.consent {
+  display: flex; gap: 12px; align-items: flex-start;
+  margin: 20px 0; font-size: 0.92rem;
 }
-.field input:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(0,113,227,.22); }
-.field input[aria-invalid="true"] { border-color: var(--bad); }
+.consent input { width: 20px; height: 20px; flex: none; accent-color: var(--ink); margin-top: 2px; }
 
-/* Trampa para bots: fuera de la pantalla, nunca oculta con display:none
-   (hay bots que justamente buscan eso). */
+/* Trampa para bots. Fuera de la pantalla y no con display:none: así sigue
+   siendo un campo real que un bot completa y una persona nunca ve. */
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
-.consent { display: flex; gap: 10px; align-items: flex-start; margin: 8px 0 20px; font-size: 14px; color: var(--muted); }
-.consent input { margin-top: 3px; accent-color: var(--accent); width: 16px; height: 16px; flex: none; }
-
 .btn-primary {
-  width: 100%; border: 0; cursor: pointer;
-  background: var(--accent); color: var(--accent-ink);
-  font: inherit; font-weight: 600; font-size: 17px;
-  padding: 14px 22px; border-radius: var(--pill);
-  transition: background .12s ease;
-}
-.btn-primary:hover { background: var(--accent-h); }
-.btn-primary[disabled] { opacity: .5; cursor: progress; }
-
-.btn-wa { background: var(--wa); color: #04220f; }
-.btn-wa:hover { background: var(--wa); filter: brightness(1.05); }
-.btn-wa svg { width: 20px; height: 20px; fill: currentColor; flex: none; }
-
-/* Algunos botones son enlaces y no botones de formulario: dejan de ocupar el
-   ancho completo y alinean su icono. */
-.franja-cta, .oferta-libro-cta {
-  width: auto;
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  text-decoration: none;
-}
-.franja-cta:hover, .oferta-libro-cta:hover { text-decoration: none; }
-
-.microcopy { font-size: 13px; color: var(--muted-dim); margin: 14px 0 0; }
-
-/* ── el salto al pago ──
-   Lo inserta reserva.js bajo el estado del formulario, cuando la reserva ya
-   quedó guardada y solo falta pagar. */
-
-.pago { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
-.pago-btn { display: block; text-align: center; text-decoration: none; }
-.pago-btn:hover { text-decoration: none; }
-.pago-aviso { margin: 10px 0 0; font-size: 13px; color: var(--muted-dim); text-align: center; }
-
-.form-status { margin: 14px 0 0; font-size: 15px; font-weight: 500; display: none; }
-.form-status.is-on  { display: block; }
-.form-status.is-ok  { color: var(--good); }
-.form-status.is-wait{ color: var(--accent); }
-.form-status.is-err { color: var(--bad); }
-
-/* ── columna visual del hero: el equipo primero, el libro después ── */
-
-.hero-visual { position: sticky; top: 82px; display: grid; gap: 20px; }
-
-/* La foto superior del Mac mini ya viene sobre #f5f5f7, el mismo gris de Apple:
-   el recuadro toma ese color y la unión no se nota. */
-.foto-tile {
-  margin: 0;
-  background: var(--bg-alt);
-  border-radius: var(--r);
-  overflow: hidden;
-}
-.foto-tile img { width: 100%; }
-.foto-tile figcaption {
-  padding: 0 22px 20px;
-  font-size: 14px; color: var(--muted-dim); text-align: center;
-}
-
-.hero-extra {
-  border: 1px solid var(--line); border-radius: var(--r);
-  padding: 22px 24px;
-}
-.hero-extra h2 { font-size: 19px; margin-bottom: 8px; }
-.hero-extra p { color: var(--muted); font-size: 15px; margin-bottom: 12px; }
-.hero-extra a { font-size: 15px; font-weight: 500; }
-.hero-extra a span { display: inline-block; margin-left: 2px; }
-
-/* ── la portada del ebook, junto al índice ── */
-
-.libro-grid { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 48px; align-items: start; }
-.libro-lado { display: grid; gap: 22px; }
-.libro-portada { text-align: center; }
-
-.book {
-  position: relative; display: inline-block;
-  transform: perspective(1500px) rotateY(-13deg) rotateX(2deg);
-  filter: drop-shadow(0 26px 44px rgba(0,0,0,.26));
-}
-.book-face { display: block; width: min(268px, 70vw); height: auto; border-radius: 3px 7px 7px 3px; }
-.book-edge {
-  position: absolute; inset: 0 auto 0 100%;
-  width: 12px;
-  background: linear-gradient(90deg, #c7c7cc, #fff 45%, #c7c7cc);
-  border-radius: 0 3px 3px 0;
-  transform: rotateY(24deg); transform-origin: left center;
-}
-.cover-note { margin: 26px 0 0; font-size: 14px; color: var(--muted); }
-.cover-note-extra { margin: 18px 0 0; }
-.cover-note b { display: block; color: var(--text); font-size: 15px; margin-bottom: 2px; }
-
-
-/* ───────────────────────────  bandas  ─────────────────────────── */
-
-.band { padding-block: 92px; }
-.band-alt { background: var(--bg-alt); }
-
-.kicker {
-  font-size: 15px; font-weight: 600; letter-spacing: 0;
-  color: var(--muted-dim); margin: 0 0 10px;
-  text-transform: none;
-}
-.h2 { font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.025em; margin-bottom: 20px; max-width: 26ch; }
-.band-lead { font-size: 19px; color: var(--muted); max-width: 68ch; margin-bottom: 38px; }
-
-.band-foot {
-  margin-top: 34px; padding: 20px 24px;
-  background: rgba(0,0,0,.04);
-  border-radius: var(--r);
-  color: var(--muted); font-size: 16px;
-}
-
-/* ── fotos a lo ancho de una banda ── */
-
-.band-foto  { background: var(--bg-foto); }
-.band-foto-2{ background: var(--bg-foto-2); }
-
-/* La foto trae su propio fondo y la banda usa ese mismo color, así que el
-   equipo aparece recortado sobre la página, sin borde ni recuadro. */
-.foto-ancha { margin: 0 0 46px; }
-.foto-ancha img { width: 100%; max-width: 900px; margin-inline: auto; }
-.foto-ancha figcaption {
-  max-width: 620px; margin: 6px auto 0;
-  text-align: center; font-size: 15px; color: var(--muted);
-}
-.foto-caso { margin: 34px 0 0; }
-.foto-caso img { border-radius: var(--r); }
-
-/* ── contraste ── */
-
-.contrast { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-.card {
-  background: var(--surface); border: 1px solid var(--line);
-  border-radius: var(--r); padding: 30px;
-}
-.card h3 { margin-bottom: 16px; }
-.card p { color: var(--muted); }
-.card ul { margin: 18px 0 0; padding-left: 20px; color: var(--muted); display: grid; gap: 8px; font-size: 15px; }
-.card-bad  { border-color: rgba(215,0,21,.22); }
-.card-good { border-color: rgba(36,138,61,.28); }
-
-.tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; padding: 5px 11px; border-radius: var(--pill); }
-.tag-bad  { color: var(--bad);  background: rgba(215,0,21,.08); }
-.tag-good { color: var(--good); background: rgba(36,138,61,.1); }
-
-/* ── pasos ── */
-
-.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-.steps li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 28px; }
-.band-alt .steps li { border-color: transparent; }
-.step-n {
-  display: inline-grid; place-items: center;
-  width: 34px; height: 34px; border-radius: 50%; margin-bottom: 16px;
-  background: var(--accent); color: var(--accent-ink); font-weight: 600; font-size: 16px;
-}
-.steps h3 { font-size: 19px; margin-bottom: 10px; }
-.steps p { color: var(--muted); font-size: 15px; margin: 0; }
-
-/* ── los tres pilares del agente ── */
-
-.pilares { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-.pilar {
-  background: var(--surface); border: 1px solid var(--line);
-  border-radius: var(--r); padding: 30px;
-}
-.pilar h3 { font-size: 21px; margin-bottom: 12px; }
-.pilar p { color: var(--muted); font-size: 15.5px; }
-.pilar-ej {
-  margin: 18px 0 0; padding-top: 16px;
-  border-top: 1px solid var(--line-soft);
-  font-size: 14.5px;
-}
-
-/* ── tabla ── */
-
-.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); }
-.iso { width: 100%; min-width: 660px; border-collapse: collapse; font-size: 15px; }
-.iso thead th {
-  text-align: left; font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
-  color: var(--muted-dim); background: var(--bg-alt); padding: 14px 18px;
-  border-bottom: 1px solid var(--line);
-}
-.iso tbody th {
-  text-align: left; font-weight: 600; color: var(--text);
-  padding: 16px 18px; vertical-align: top; white-space: nowrap;
-}
-.iso td { padding: 16px 18px; color: var(--muted); vertical-align: top; }
-.iso tbody tr + tr th, .iso tbody tr + tr td { border-top: 1px solid var(--line-soft); }
-
-/* ── caso ── */
-
-.case { max-width: 780px; }
-.case p { color: var(--muted); font-size: 18px; }
-.case blockquote {
-  margin: 30px 0 0; padding: 24px 28px;
-  background: var(--surface); border-radius: var(--r);
+  width: 100%; font-family: inherit; font-weight: 700; font-size: 1rem;
+  text-align: center; text-decoration: none; cursor: pointer;
+  padding: 16px 22px; color: var(--ink); background: var(--yellow);
+  border: var(--border-w) solid var(--ink); border-radius: var(--radius);
   box-shadow: var(--shadow);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
 }
-.case blockquote p { margin: 0; font-size: 17px; }
+.btn-primary:hover:not(:disabled) { transform: translate(-2px, -2px); box-shadow: var(--shadow-lg); }
+.btn-primary:active:not(:disabled) { transform: translate(3px, 3px); box-shadow: 2px 2px 0 0 var(--ink); }
+.btn-primary:disabled { opacity: 0.6; cursor: default; }
 
-/* ── índice ── */
+/* Los CTA que son enlaces y no botones de formulario no ocupan todo el ancho. */
+.btn-inline { width: auto; }
 
-.toc { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.btn-wa { background: var(--lime); }
+
+.microcopy { font-size: 0.85rem; margin: 16px 0 0; opacity: 0.8; }
+
+/* ---------------------------------- estado del formulario y salto al pago */
+.form-status {
+  display: none;
+  font-family: var(--font-mono); font-size: 0.86rem; font-weight: 600;
+  margin: 16px 0 0;
+}
+.form-status.is-on { display: block; }
+.form-status.is-ok { color: #0a7b52; }
+.form-status.is-wait { color: #2c281f; }
+.form-status.is-err { color: #b3123f; }
+
+/* Este bloque lo inyecta reserva.js cuando la reserva queda tomada. */
+.pago { margin-top: 20px; padding-top: 20px; border-top: var(--border-w) solid var(--ink); }
+.pago-btn { background: var(--pink); }
+.pago-aviso { margin: 12px 0 0; font-family: var(--font-mono); font-size: 0.8rem; text-align: center; opacity: 0.75; }
+
+/* ------------------------------------------------------- de dónde salen las horas */
+.tabla-wrap { overflow-x: auto; border: var(--border-w) solid var(--ink); border-radius: var(--radius); box-shadow: var(--shadow); background: var(--paper); }
+
+.tabla { width: 100%; border-collapse: collapse; min-width: 560px; }
+
+.tabla th, .tabla td { padding: 14px 18px; text-align: left; border-bottom: 2px solid var(--ink); }
+.tabla thead th { background: var(--violet); color: var(--paper); font-family: var(--font-mono); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.tabla tbody tr:last-child td, .tabla tbody tr:last-child th { border-bottom: 0; }
+.tabla tfoot th, .tabla tfoot td { background: var(--yellow); font-weight: 700; border-top: var(--border-w) solid var(--ink); border-bottom: 0; }
+.tabla .num { font-family: var(--font-mono); font-weight: 600; white-space: nowrap; }
+
+/* ------------------------------------------------------ ilustraciones SVG */
+.ilus { display: block; width: 100%; height: auto; }
+
+.ilus-caja {
+  background: var(--paper);
+  border: var(--border-w) solid var(--ink); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 24px;
+}
+
+figure { margin: 0; }
+
+.ilus-pie { margin-top: 14px; font-size: 0.88rem; opacity: 0.8; }
+
+/* ------------------------------------------------------------- el ebook */
+.libro { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 52px; align-items: start; }
+
+.toc { list-style: none; padding: 0; display: grid; gap: 16px; counter-reset: cap; }
+
 .toc li {
-  display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 4px 18px; align-items: baseline;
-  padding: 22px 0;
-  border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: auto 1fr; gap: 6px 14px;
+  background: var(--paper);
+  border: var(--border-w) solid var(--ink); border-radius: var(--radius);
+  box-shadow: var(--shadow-sm); padding: 18px 20px;
 }
-.toc li:last-child { border-bottom: 1px solid var(--line); }
-.toc b { font-size: 17px; font-weight: 600; }
-.toc li > span:last-child { grid-column: 2; color: var(--muted); font-size: 15px; }
-.route {
+.toc li::before {
+  counter-increment: cap; content: counter(cap, decimal-leading-zero);
   grid-row: span 2; align-self: start;
-  font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
-  padding: 5px 9px; border-radius: var(--pill); text-align: center;
+  font-family: var(--font-mono); font-weight: 700; font-size: 1.1rem;
+  padding: 4px 10px; border: 2px solid var(--ink); border-radius: 8px;
+  background: var(--bg);
 }
-.route-exec { color: #8944ab; background: rgba(137,68,171,.1); }
-.route-tech { color: var(--link); background: rgba(0,102,204,.1); }
-.route-both { color: var(--good); background: rgba(36,138,61,.1); }
+.toc b { font-size: 1.05rem; }
+.toc span { font-size: 0.94rem; opacity: 0.85; }
 
-/* ── FAQ ── */
+.libro-lado { display: grid; gap: 22px; justify-items: center; text-align: center; }
 
-.faq { display: grid; gap: 0; max-width: 860px; }
-.faq details { border-top: 1px solid var(--line); }
-.faq details:last-child { border-bottom: 1px solid var(--line); }
+.book { position: relative; }
+.book-face {
+  display: block; width: min(280px, 72vw); height: auto;
+  border: var(--border-w) solid var(--ink); border-radius: 6px;
+  box-shadow: var(--shadow-lg);
+}
+
+.cover-note { font-family: var(--font-mono); font-size: 0.82rem; }
+.cover-note b { display: block; font-size: 0.95rem; margin-bottom: 4px; }
+
+/* ----------------------------------------------------------------- FAQ */
+.faq { display: grid; gap: 14px; }
+
+.faq details {
+  background: var(--paper);
+  border: var(--border-w) solid var(--ink); border-radius: var(--radius);
+  box-shadow: var(--shadow-sm); padding: 18px 22px;
+}
+.faq details[open] { box-shadow: var(--shadow); }
+
 .faq summary {
-  cursor: pointer; list-style: none; padding: 20px 34px 20px 0; position: relative;
-  font-weight: 500; font-size: 17px;
+  cursor: pointer; font-weight: 700; font-size: 1.05rem;
+  list-style: none; display: flex; justify-content: space-between; gap: 16px;
 }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary::after {
-  content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
-  color: var(--accent); font-size: 24px; font-weight: 300; line-height: 1;
-}
-.faq details[open] summary::after { content: "\2013"; }
-.faq p { color: var(--muted); margin: 0 0 20px; font-size: 16px; max-width: 72ch; }
+.faq summary::after { content: "+"; font-family: var(--font-mono); font-weight: 700; }
+.faq details[open] summary::after { content: "−"; }
+.faq details p { margin-top: 14px; font-size: 0.96rem; }
 
-/* ── cierre ── */
-
-.band-close { background: var(--bg-alt); }
-.close { max-width: 680px; margin-inline: auto; text-align: center; }
-.close .h2 { max-width: none; }
-.close-lead { color: var(--muted); font-size: 19px; margin-bottom: 30px; max-width: 56ch; margin-inline: auto; }
-.close .reserva { text-align: left; }
-.close-nota { margin-top: 22px; }
-
-/* ── footer ── */
-
-.footer { background: var(--bg-alt); padding-block: 38px 48px; border-top: 1px solid var(--line); }
-.footer-in { display: grid; gap: 12px; }
-.footer-note { color: var(--muted-dim); font-size: 13px; max-width: 76ch; margin: 0; }
-
-
-/* ───────────────────────  mapa de controles ISO  ───────────────────────
-   Va bajo la tabla de la plataforma: la tabla explica qué trae el equipo,
-   esta lista traduce eso al lenguaje del Anexo A. */
-
-.sub-h3 { font-size: clamp(21px, 2.2vw, 26px); margin: 52px 0 14px; }
-
-.mapa { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; max-width: 900px; }
-.mapa li {
-  display: grid; grid-template-columns: 84px 1fr; gap: 16px; align-items: start;
-  background: var(--surface); border: 1px solid var(--line);
-  border-radius: var(--r-sm); padding: 15px 18px;
-}
-.mapa b {
-  font-size: 13px; font-weight: 600; letter-spacing: .03em;
-  color: var(--link); background: rgba(0,102,204,.09);
-  border-radius: var(--pill); padding: 4px 0; text-align: center;
-}
-.mapa span { color: var(--muted); font-size: 15px; }
-
-
-/* ───────────────────────  el equipo preconfigurado  ───────────────────────
-   La alternativa para quien no quiere armarlo. No se vende en la página —se
-   cotiza por WhatsApp—, así que es una sola tarjeta y no compite con el libro. */
-
-.franja {
-  display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-  background: var(--surface); border: 1px solid var(--line);
-  border-radius: var(--r); overflow: hidden;
-}
-.franja-texto { padding: 36px; }
-.franja-precio { background: var(--bg-alt); padding: 36px; border-left: 1px solid var(--line); }
-
-.oferta-tag { font-size: 14px; font-weight: 600; color: var(--muted-dim); margin: 0 0 8px; }
-.franja-texto .h2 { font-size: clamp(24px, 2.8vw, 32px); margin-bottom: 16px; }
-.oferta-lead { color: var(--muted); margin-bottom: 22px; }
-
-.incluye { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.incluye li { position: relative; padding-left: 28px; color: var(--muted); font-size: 15px; }
-.incluye li::before {
-  content: ""; position: absolute; left: 3px; top: .34em;
-  width: 12px; height: 6px;
-  border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent);
-  transform: rotate(-45deg);
-}
-
-.oferta-precio { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
-.oferta-precio b { font-size: clamp(32px, 3.6vw, 38px); font-weight: 700; letter-spacing: -0.03em; }
-.oferta-precio span { font-size: 14px; color: var(--muted); }
-
-.franja-cuenta { font-size: 14.5px; color: var(--muted); margin-bottom: 22px; }
-.oferta-nota { font-size: 13px; color: var(--muted-dim); margin: 14px 0 0; }
-
-
-/* ───────────────────────  burbuja de WhatsApp  ───────────────────────
-   Canal directo de contacto. Va fija sobre la página porque la duda que
-   frena una compra de este tipo aparece leyendo, no al final. */
-
+/* --------------------------------------------------------- burbuja de WA */
 .wa {
-  position: fixed; right: 20px; bottom: 20px; z-index: 40;
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 12px; border-radius: var(--pill);
-  background: var(--wa); color: #04220f;
-  font-weight: 600; font-size: 15px; line-height: 1;
-  box-shadow: 0 8px 26px rgba(0,0,0,.18);
-  transition: transform .14s ease, filter .14s ease;
+  position: fixed; right: 20px; bottom: 20px; z-index: 60;
+  display: grid; place-items: center; width: 58px; height: 58px;
+  background: var(--lime); color: var(--ink);
+  border: var(--border-w) solid var(--ink); border-radius: 50%;
+  box-shadow: var(--shadow); transition: transform 0.08s ease;
 }
-.wa:hover  { filter: brightness(1.05); transform: translateY(-2px); text-decoration: none; }
-.wa:active { transform: translateY(0); }
-.wa-icon { width: 30px; height: 30px; fill: #04220f; flex: none; }
-.wa-texto { padding-right: 8px; white-space: nowrap; }
+.wa:hover { transform: translate(-2px, -2px); }
+.wa svg { width: 28px; height: 28px; fill: currentColor; }
 
-
-/* ───────────────────────────  responsive  ─────────────────────────── */
-
-@media (max-width: 940px) {
-  /* El titular es el gancho: en pantallas angostas va primero y la foto del
-     equipo cierra el bloque, en vez de empujar todo bajo el pliegue. */
-  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-  .hero-visual { position: static; }
-  .contrast, .steps, .pilares { grid-template-columns: 1fr; }
-  .franja { grid-template-columns: 1fr; }
-  .franja-precio { border-left: 0; border-top: 1px solid var(--line); }
-  /* El libro cambia de orden: primero la portada y el precio, después el índice. */
-  .libro-grid { grid-template-columns: 1fr; gap: 34px; }
-  .libro-lado { order: -1; }
-  .band { padding-block: 68px; }
+/* --------------------------------------------------------- responsive */
+@media (max-width: 980px) {
+  .hero__grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero__aside { position: static; }
+  .libro { grid-template-columns: 1fr; gap: 40px; }
+  .libro-lado { justify-items: start; text-align: left; }
 }
 
 @media (max-width: 620px) {
-  /* Desde acá el precio sale del botón de la barra: marca y precio juntos
-     ya no caben en una sola línea. */
-  .brand { font-size: 15px; }
-  .topbar-cta { font-size: 13px; padding: 7px 14px; }
-  .cta-precio { display: none; }
-  /* En pantalla angosta la etiqueta estorba al botón del formulario: solo el círculo. */
-  .wa { right: 14px; bottom: 14px; gap: 0; }
-  .wa-texto { display: none; }
-}
-
-@media (max-width: 420px) {
-  .brand { font-size: 14px; }
-  .hero { padding-block: 44px 58px; }
-  .band { padding-block: 56px; }
-  .field-row { grid-template-columns: 1fr; }
-  .reserva, .pilar, .card { padding: 22px; }
-  .franja-texto, .franja-precio { padding: 24px; }
-  .offer { gap: 14px; padding: 18px; }
-  .toc li { grid-template-columns: 1fr; }
-  .route { grid-row: auto; justify-self: start; margin-bottom: 6px; }
-  .toc li > span:last-child { grid-column: 1; }
-  .mapa li { grid-template-columns: 1fr; gap: 8px; }
-  .mapa b { justify-self: start; padding: 4px 12px; }
-  .h2 { max-width: none; }
-}
-
-@media (max-width: 360px) {
-  /* Pantallas muy angostas: el título ya no cabe junto al botón. */
-  .brand-mark { display: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  .form-anchor { top: -76px; }
+  .reserva { padding: 22px 18px; }
+  .offer { padding: 18px; }
+  .wa { right: 14px; bottom: 14px; }
 }
